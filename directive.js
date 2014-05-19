@@ -85,8 +85,8 @@ angular.module('jmColorEyedropper', [])
         ngModel:  '=',
         ngChange: '&'
       },
-      link:     function (scope, element) {
-        scope.$watch('imgSrc', function (src) {
+      link:     function (scope, element, attrs) {
+        attrs.$observe('imgSrc', function (src) {
           if (!src || src === undefined || src === null) {
             return false;
           }
@@ -101,7 +101,7 @@ angular.module('jmColorEyedropper', [])
             resample_hermite(canvas, img.width, img.height, scope.width, scope.height);
           };
           img.src = src;
-        }, true);
+        });
         element.click(function (e) {
           var pos = findPos(this);
           var x = e.pageX - pos.x;
@@ -111,6 +111,8 @@ angular.module('jmColorEyedropper', [])
           var p = c.getImageData(x, y, 1, 1).data;
           scope.$apply(function () {
             scope.ngModel = p;
+          });
+          scope.$apply(function () {
             if (angular.isFunction(scope.ngChange)) {
               scope.ngChange(p);
             }
