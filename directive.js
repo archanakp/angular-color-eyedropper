@@ -2,8 +2,8 @@ angular.module('jmColorEyedropper', [])
   .directive('jmEyedropperCanvas', function () {
     "use strict";
 
-    // based on code from SO: http://stackoverflow.com/a/19223362/680786 (thanks, @ViliusL)
     function resample_hermite(canvas, W, H, W2, H2) {
+      // resample code based on code from SO: http://stackoverflow.com/a/19223362/680786 (thanks, @ViliusL)
       var time1 = Date.now();
       var img = canvas.getContext("2d").getImageData(0, 0, W, H);
       var img2 = canvas.getContext("2d").getImageData(0, 0, W2, H2);
@@ -63,6 +63,7 @@ angular.module('jmColorEyedropper', [])
     }
 
     function findPos(obj) {
+      // thanks, @lwburk http://stackoverflow.com/a/6736135
       var curleft = 0, curtop = 0;
       if (obj.offsetParent) {
         do {
